@@ -1,0 +1,329 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     |                                                 |
+|   \\  /    A nd           | Copyright (C) 2016 Ehsan Madadi-Kandjani        |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// General macros to create cylinder mesh
+
+
+
+
+
+
+
+
+
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Maximum height in the domain
+
+
+// Center point in X cylinder
+
+// Center point in Y cylinder
+
+// Define bottom height (from the terrain)
+
+
+// Inner square side half //todo: rewrite
+
+// Inner square side curvature
+//define(sc, 720) //todo: try to parameterise
+ //todo: try to parameterise
+
+// Number of cells at inner square
+
+// Number of cells between inner square and circle
+
+// Number of cells in the cylinder height
+
+
+
+// Define stretching 
+
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// Calculate CFD domain extension following COST732 guidelines
+
+//define(Rcity, 1500 )
+// Cylinder radius
+
+
+// Second part of cells in inner/outer circle
+
+
+
+// Height of cylinder
+
+// Base z
+
+// Mid z
+
+// Outlet z
+
+
+
+
+
+// 45 degree points angle
+
+
+
+
+
+// Half of 45 degree points angle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Inner square x and y position
+// x
+
+
+
+
+// y
+
+
+
+
+
+// Circle x and y positions
+// x
+
+
+
+
+// y
+
+
+
+
+
+// Inner square x and y position middle curvatures
+// x
+
+
+
+
+// y
+
+
+
+
+
+// Circle x and y positions middle curvatures
+// x
+
+
+
+
+// y
+
+
+
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+vertices
+(
+    (720 -720 -5.62434 ) // Vertex s0b = 0   //0
+    (-720 -720 -5.62434 ) // Vertex s1b = 1   //1
+    (-720 720 -5.62434 ) // Vertex s2b = 2   //2
+    (720 720 -5.62434 ) // Vertex s3b = 3   //3
+    
+    (1357.64501987817 -1357.64501987817 -5.62434 ) // Vertex r0b = 4   //4
+    (-1357.64501987817 -1357.64501987817 -5.62434 ) // Vertex r1b = 5   //5
+    (-1357.64501987817 1357.64501987817 -5.62434 ) // Vertex r2b = 6   //6
+    (1357.64501987817 1357.64501987817 -5.62434 ) // Vertex r3b = 7   //7
+
+    (720 -720 58.37566) // Vertex s0m = 8   //8
+    (-720 -720 58.37566) // Vertex s1m = 9   //9
+    (-720 720 58.37566) // Vertex s2m = 10   //10
+    (720 720 58.37566) // Vertex s3m = 11   //11
+    
+    (1357.64501987817 -1357.64501987817 58.37566) // Vertex r0m = 12   //12
+    (-1357.64501987817 -1357.64501987817 58.37566) // Vertex r1m = 13   //13
+    (-1357.64501987817 1357.64501987817 58.37566) // Vertex r2m = 14   //14
+    (1357.64501987817 1357.64501987817 58.37566) // Vertex r3m = 15   //15
+    
+    (720 -720 314.37566) // Vertex s0t = 16   //16
+    (-720 -720 314.37566) // Vertex s1t = 17   //17
+    (-720 720 314.37566) // Vertex s2t = 18   //18
+    (720 720 314.37566) // Vertex s3t = 19   //19
+    
+    (1357.64501987817 -1357.64501987817 314.37566) // Vertex r0t = 20   //20
+    (-1357.64501987817 -1357.64501987817 314.37566) // Vertex r1t = 21   //21
+    (-1357.64501987817 1357.64501987817 314.37566) // Vertex r2t = 22   //22
+    (1357.64501987817 1357.64501987817 314.37566) // Vertex r3t = 23   //23
+);
+
+blocks
+(
+    //block0
+    hex (1 0 3 2 9 8 11 10)
+    square
+    (56 56 4)
+    simpleGrading (1 1 1)
+    
+    //block1
+    hex (0 4 7 3 8 12 15 11)
+    innerCircle
+    (28 56 4)
+    simpleGrading (2 1 1)
+    
+    //block2
+    hex (3 7 6 2 11 15 14 10)
+    innerCircle
+    (28 56 4)
+    simpleGrading (2 1 1)
+    
+    //block3
+    hex (2 6 5 1 10 14 13 9)
+    innerCircle
+    (28 56 4)
+    simpleGrading (2 1 1)
+    
+    //block4
+    hex (1 5 4 0 9 13 12 8)
+    innerCircle
+    (28 56 4)
+    simpleGrading (2 1 1)
+
+    //block01
+    hex (9 8 11 10 17 16 19 18)
+    square
+    (56 56 6)
+    simpleGrading (1 1 2)
+    
+    //block11
+    hex (8 12 15 11 16 20 23 19)
+    innerCircle
+    (28 56 6)
+    simpleGrading (2 1 2)
+    
+    //block21
+    hex (11 15 14 10 19 23 22 18)
+    innerCircle
+    (28 56 6)
+    simpleGrading (2 1 2)
+    
+    //block31
+    hex (10 14 13 9 18 22 21 17)
+    innerCircle
+    (28 56 6)
+    simpleGrading (2 1 2)
+    
+    //block41
+    hex (9 13 12 8 17 21 20 16)
+    innerCircle
+    (28 56 6)
+    simpleGrading (2 1 2)
+);
+
+edges
+(
+    //Circle edges
+    arc 7 4 (1920 0 -5.62434 )
+    arc 4 5 (1.17566092718146e-13 -1920 -5.62434 )
+    arc 5 6 (-1920 2.35132185436291e-13 -5.62434 )
+    arc 6 7 (1.17566092718146e-13 1920 -5.62434 )
+    
+    arc 15 12 (1920 0 58.37566)
+    arc 12 13 (1.17566092718146e-13 -1920 58.37566)
+    arc 13 14 (-1920 2.35132185436291e-13 58.37566)
+    arc 14 15 (1.17566092718146e-13 1920 58.37566)
+
+    arc 23 20 (1920 0 314.37566)
+    arc 20 21 (1.17566092718146e-13 -1920 314.37566)
+    arc 21 22 (-1920 2.35132185436291e-13 314.37566)
+    arc 22 23 (1.17566092718146e-13 1920 314.37566)
+    
+    arc 3 0 (792 0 -5.62434 )
+    arc 0 1 (0 -792 -5.62434 )
+    arc 1 2 (-792 0 -5.62434 )
+    arc 2 3 (0 792 -5.62434 )
+
+    arc 11 8 (792 0 58.37566)
+    arc 8 9 (0 -792 58.37566)
+    arc 9 10 (-792 0 58.37566)
+    arc 10 11 (0 792 58.37566)
+    
+    arc 19 16 (792 0 314.37566)
+    arc 16 17 (0 -792 314.37566)
+    arc 17 18 (-792 0 314.37566)
+    arc 18 19 (0 792 314.37566)
+);
+
+patches
+(
+    patch inletOutlet
+    (
+        (4 7 12 15)
+        (5 4 13 12)
+        (6 5 14 13)
+        (7 6 15 14)
+        (12 15 23 20)
+        (13 12 20 21)
+        (14 13 21 22)
+        (15 14 22 23)
+    )
+    
+    wall Terrain
+    (
+        (3 0 1 2)
+        (3 7 4 0)
+        (2 6 7 3)
+        (1 5 6 2)
+        (0 4 5 1)
+    )
+    
+    patch top
+    (
+        (19 18 17 16)
+        (19 16 20 23)
+        (18 19 23 22)
+        (17 18 22 21)
+        (16 17 21 20)
+    )
+);
+
+mergePatchPairs
+(
+);
+

@@ -1,0 +1,19 @@
+// ========================================CITY4CFD SUMMARY ======================================= //
+All coordinates are translated by -(90242 435592)
+Domain edge elevation: 1.06434
+Building reconstruction summary: successfully reconstructed buildings: 599
+                                 num of failed reconstructions: 6
+
+// ========================================= CITY4CFD LOG ========================================= //
+Building ID: 27136 Failed to reconstruct. Reason: Found no points belonging to the building
+Building ID: 29748 Height lower than minimum prescribed height of 2.000000 m
+Building ID: 30995 Failed to reconstruct. Reason: Found no points belonging to the building
+Building ID: 23330 Height lower than minimum prescribed height of 2.000000 m
+Building ID: 25835 Failed to reconstruct. Reason: Found no points belonging to the building
+Building ID: 26472 Height lower than minimum prescribed height of 2.000000 m
+Building ID: 26551 Height lower than minimum prescribed height of 2.000000 m
+Building ID: 34021 Failed to reconstruct. Reason: Found no points belonging to the building
+Building ID: 34029 Failed to reconstruct. Reason: Found no points belonging to the building
+Building ID: 34031 Failed to reconstruct. Reason: Found no points belonging to the building
+
+// ------------------------------------------------------------------------------------------------ //

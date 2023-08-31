@@ -1,0 +1,66 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      epsilon;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -3 0 0 0 0];
+
+#include        "include/ABLConditions"
+
+internalField   uniform $epsilonInlet;
+
+boundaryField
+{
+    #include        "include/ABLConditions"
+
+    inletOutlet
+    {
+        type            inletOutlet;
+        inletValue      uniform $epsilonInlet;
+        value           uniform $epsilonInlet;
+    }
+    top
+    {
+        type            inletOutlet;
+        inletValue      uniform $epsilonInlet;
+        value           uniform $epsilonInlet;
+    }
+    Buildings
+    {
+        type            epsilonWallFunction;
+        value           uniform $epsilonInlet;
+    }
+    Water
+    {
+        type            epsilonz0WallFunction;
+        z0              $z0_Water;
+        value           $internalField;
+    }
+    Terrain
+    {
+        type            epsilonz0WallFunction;
+        z0              $z0;
+        value           $internalField;
+    }
+    Vegetation
+    {
+        type            epsilonz0WallFunction;
+        z0              $z0_Vegetation;
+        value           $internalField;
+    }
+}
+
+
+// ************************************************************************* //

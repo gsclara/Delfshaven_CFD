@@ -1,0 +1,35 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+
+Uref                 5;
+Zref                 10;
+zDir                 (0 0 1);
+angle		     90;
+angleRad             #calc "degToRad($angle)";
+comp1                #calc "cos($angleRad)";
+comp2                #calc "sin($angleRad)";
+flowDir              ($comp1 $comp2 0);
+z0                   uniform 0.25;
+z0_		     0.25;
+z0_Vegetation        uniform 0.1;
+z0_Water             uniform 0.001;
+zGround              uniform 0;
+kappa                0.41;
+Cmu                  0.09;
+E                    9.8;
+pressure             0;
+uStar                #calc "$Uref * $kappa / log(( $Zref + $z0_ )/ $z0_ )";
+Utop                 #calc "$uStar / $kappa * log(( $Zref + $z0_ )/ $z0_)";
+kInlet               #calc "$uStar * $uStar / sqrt( $Cmu )";
+epsilonInlet         #calc "pow($uStar,3) / ( $kappa * ( $Zref + $z0_ ))";
+epsilonTop           #calc "pow($uStar,3) / ( $kappa * ( $Zref + $z0_ ))";
+comp1byUref	     #calc "$Uref*$comp1";
+comp2byUref 	     #calc "$Uref*$comp2";
+flowVelocity         ($comp1byUref $comp2byUref 0);
+
+// ************************************************************************* //

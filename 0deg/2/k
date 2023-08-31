@@ -1,0 +1,62 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include        "include/ABLConditions"
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform $kInlet;
+
+boundaryField
+{
+    #include    "include/ABLConditions"
+
+    inletOutlet
+    {
+        type            inletOutlet;
+        inletValue      uniform $kInlet;
+        value           uniform $kInlet;
+    }
+    top
+    {
+        type            inletOutlet;
+        inletValue      uniform $kInlet;
+        value           uniform $kInlet;
+    }
+    Buildings
+    {
+        type            kqRWallFunction;
+        value           uniform $kInlet;
+    }
+    Water
+    {
+        type            kqRWallFunction;
+        value           uniform $kInlet;
+    }
+    Terrain
+    {
+        type            kqRWallFunction;
+        value           uniform $kInlet;
+    }
+    Vegetation
+    {
+        type            kqRWallFunction;
+        value           uniform $kInlet;
+    }
+}
+
+
+// ************************************************************************* //
