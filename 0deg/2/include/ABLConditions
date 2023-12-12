@@ -6,30 +6,35 @@
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 
-Uref                 5;
-Zref                 10;
-zDir                 (0 0 1);
-angle		     90;
+/*-------------------- INPUT PARAMETERS FOR ABL INFLOW---------------------------------*/
+Uref                 5.0;		// Reference bulk velocity in m/s
+Zref                 10.0;		// Reference height for Uref in m
+zDir                 (0 0 1);		// Specify the coordinate corresponding to vertical
+angle		             60;		// Angle of attack in degrees w.r.t North
+z0                   uniform 0.5;	// Terrain hydraulic roughness in m
+z0_		               0.5;		// Terrain hydraulic roughness (for computations in script)
+z0vegetation         uniform 0.03;	// Vegetation hydraulic roughness in m
+z0water              uniform 0.0002;	// Water hydraulic roughness in m
+zGround              uniform -3.8225744; // Minimum z coordinate of the mesh in m
+kappa                0.41;		// von Karman Constant [-]
+Cmu                  0.09;		// k-epsilon turbulence closure constant [-]
+E                    9.8;		// Model constant [-]
+pressure             0;			// Reference pressure
+/*----------------------------------------------------------------------------------*/
+/*				BELOW SOME CALCULATIONS				    */
+/*			Do not intervene if unsure what is happening		    */
+/*----------------------------------------------------------------------------------*/
 angleRad             #calc "degToRad($angle)";
 comp1                #calc "cos($angleRad)";
 comp2                #calc "sin($angleRad)";
 flowDir              ($comp1 $comp2 0);
-z0                   uniform 0.25;
-z0_		     0.25;
-z0_Vegetation        uniform 0.1;
-z0_Water             uniform 0.001;
-zGround              uniform 0;
-kappa                0.41;
-Cmu                  0.09;
-E                    9.8;
-pressure             0;
-uStar                #calc "$Uref * $kappa / log(( $Zref + $z0_ )/ $z0_ )";
-Utop                 #calc "$uStar / $kappa * log(( $Zref + $z0_ )/ $z0_)";
-kInlet               #calc "$uStar * $uStar / sqrt( $Cmu )";
+uStar                #calc "( $Uref * $kappa ) / log(( $Zref + $z0_ )/ $z0_ )";
+Utop                 #calc "( $uStar / $kappa ) * log(( $Zref + $z0_ )/ $z0_)";
+kInlet               #calc "( $uStar * $uStar ) / sqrt( $Cmu )";
 epsilonInlet         #calc "pow($uStar,3) / ( $kappa * ( $Zref + $z0_ ))";
 epsilonTop           #calc "pow($uStar,3) / ( $kappa * ( $Zref + $z0_ ))";
-comp1byUref	     #calc "$Uref*$comp1";
-comp2byUref 	     #calc "$Uref*$comp2";
+comp1byUref	         #calc "$Uref*$comp1";
+comp2byUref	         #calc "$Uref*$comp2";
 flowVelocity         ($comp1byUref $comp2byUref 0);
 
 // ************************************************************************* //
